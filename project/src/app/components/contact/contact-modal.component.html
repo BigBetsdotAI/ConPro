@@ -1,0 +1,69 @@
+<div class="contact-modal" [ngClass]="{ 'show': isModalOpen }" *ngIf="isModalOpen">
+  <div class="modal-overlay" (click)="closeContactForm()"></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Contact Us</h2>
+      <button class="close-btn" (click)="closeContactForm()">&times;</button>
+    </div>
+    <form [formGroup]="quickContactForm" (ngSubmit)="onSubmitQuickForm()" class="quick-contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="quickName">Name</label>
+          <input id="quickName" formControlName="quickName" [ngClass]="{'error': isFieldInvalid(quickContactForm, 'quickName')}" placeholder="Your Name">
+          <div class="error-message" *ngIf="isFieldInvalid(quickContactForm, 'quickName')">
+            {{ getErrorMessage(quickContactForm, 'quickName') }}
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="quickEmail">Email</label>
+          <input id="quickEmail" formControlName="quickEmail" [ngClass]="{'error': isFieldInvalid(quickContactForm, 'quickEmail')}" placeholder="Your Email">
+          <div class="error-message" *ngIf="isFieldInvalid(quickContactForm, 'quickEmail')">
+            {{ getErrorMessage(quickContactForm, 'quickEmail') }}
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="quickPhone">Phone</label>
+          <input id="quickPhone" formControlName="quickPhone" [ngClass]="{'error': isFieldInvalid(quickContactForm, 'quickPhone')}" placeholder="Your Phone">
+          <div class="error-message" *ngIf="isFieldInvalid(quickContactForm, 'quickPhone')">
+            {{ getErrorMessage(quickContactForm, 'quickPhone') }}
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="quickMessage">Message</label>
+          <textarea id="quickMessage" formControlName="quickMessage" [ngClass]="{'error': isFieldInvalid(quickContactForm, 'quickMessage')}" placeholder="Your Message"></textarea>
+          <div class="error-message" *ngIf="isFieldInvalid(quickContactForm, 'quickMessage')">
+            {{ getErrorMessage(quickContactForm, 'quickMessage') }}
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" (click)="closeContactForm()">Cancel</button>
+        <button type="submit" class="submit-modal-btn" [disabled]="isSubmitting">
+          <span *ngIf="isSubmitting" class="fa fa-spinner fa-spin"></span>
+          Send Message
+        </button>
+      </div>
+    </form>
+    <div *ngIf="showThankYou" class="thank-you-message">
+      <div class="thank-you-content">
+        <div class="thank-you-icon">&#10003;</div>
+        <h3>Thank You!</h3>
+        <div class="thank-you-text">Your message has been sent successfully. We'll get back to you soon.</div>
+        <div class="thank-you-details">
+          <div class="detail-item"><i class="fa fa-user"></i> {{ submittedData?.name }}</div>
+          <div class="detail-item"><i class="fa fa-envelope"></i> {{ submittedData?.email }}</div>
+        </div>
+        <div class="thank-you-actions">
+          <button class="submit-modal-btn" (click)="sendAnotherMessage()">Send Another Message</button>
+          <button class="cancel-btn" (click)="closeContactForm()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

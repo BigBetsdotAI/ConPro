@@ -1,0 +1,629 @@
+
+@media (max-width: 600px) {
+	.contact-section {
+		padding-top: 0px !important;
+	}
+}
+
+/* ====== CONTACT SECTION ====== */
+.contact-section {
+	padding: 90px 20px 40px 20px;
+	background: #f9fafb;
+	font-family: 'Inter', sans-serif;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+	text-align: center;
+}
+
+.label {
+	display: block;
+	text-align: center;
+	font-size: 2.25rem; /* slightly larger */
+	font-weight: 700; /* adjusted to match the requirement */
+	color: #2563eb; /* blue to match section accent */
+	margin: 0 0 8px 0;
+	letter-spacing: 0.2px;
+}
+
+.label-in-touch {
+  color: #000; /* only IN TOUCH becomes black */
+}
+
+/* Smaller subheading under the main label to mimic original design */
+.contact-header h1 {
+  margin-top: 8px;
+}
+
+/* Header */
+.contact-header {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.contact-header h1 {
+	font-size: 1.5rem;
+	font-weight: 600; /* reduced from 700 */
+	color: #111827;
+}
+
+.contact-header p {
+	color: #6b7280;
+	font-size: 1.1rem;
+	margin-top: 10px;
+}
+
+/* ====== CONTACT CONTENT ====== */
+.contact-content {
+	display: flex;
+	justify-content: space-between;
+	align-items: stretch; /* ensure children stretch to same height */
+	gap: 40px;
+	max-width: 1200px;
+	margin: 0 auto 60px;
+	padding-left: 88px;
+}
+
+/* Cards */
+.contact-info,
+.welcome-message {
+	background: #fff;
+	padding: 32px; /* unify padding */
+	border-radius: 16px;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+	flex: 1 1 0;
+	width: calc(50% - 20px);
+	max-width: none;
+	display: flex;
+	flex-direction: column; /* allow internal vertical layout */
+	box-sizing: border-box;
+}
+
+.message-p {
+	font-size: 15px;
+	margin-bottom: 16px;
+	flex: 0 0 auto;
+}
+
+.contact-info h3,
+.welcome-message h3 {
+	font-size: 18px;
+	font-weight: 600; /* make bold as requested */
+	margin-bottom: 20px;
+	color: #2563eb;
+}
+
+/* Info Items */
+.info-item {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 20px;
+}
+
+.info-item .icon {
+	width: 35px;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+	color: #2563eb;
+	margin-right: 15px;
+	font-size: 1rem;
+}
+
+.email-icon,
+.phone-icon,
+.address-icon,
+.time-icon {
+	border: 1px double #2563eb;
+}
+
+.info-details h4 {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 400;
+	color: #2563eb;
+}
+
+.info-details p {
+	margin: 3px 0 0;
+	font-size: 0.95rem;
+	color: #6b7280;
+}
+
+/* Features */
+.contact-features {
+	margin-top: 20px;
+}
+
+.feature-item {
+	display: flex;
+	align-items: center; /* align center for neat rows */
+	margin-bottom: 18px;
+}
+
+.feature-item i {
+	font-size: 1rem;
+}
+
+/* new wrapper for feature icons (circular) */
+.feature-item .icon-svg {
+	width: 36px;
+	height: 36px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	border: 1px solid #2563eb;
+	color: #2563eb;
+	background: transparent;
+	margin-right: 18px;
+}
+
+/* ensure svg inside icon containers inherits color and scales */
+.info-item .icon svg,
+.feature-item .icon-svg svg {
+	width: 60%;
+	height: 60%;
+	display: block;
+	color: inherit;
+	fill: none;
+}
+
+.feature-text {
+	display: flex;
+	align-items: center;
+	gap: 18px; /* keep title and description close and left-aligned */
+	width: auto;
+}
+
+.feature-text p {
+	margin: 0;
+	flex: 1; /* allow description to take remaining space */
+	text-align: left; /* ensure left alignment */
+}
+
+/* make titles occupy fixed width so descriptions align in a column */
+.feature-title {
+	min-width: 170px; /* adjust as needed to align description column */
+	max-width: 220px;
+}
+
+/* responsive: stack title+desc on narrow viewports */
+@media (max-width: 640px) {
+	.feature-text {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+	}
+	.feature-title {
+		min-width: 0;
+		max-width: none;
+	}
+}
+
+.feature-item h4 {
+	font-size: 15px;
+	font-weight: 400;
+	margin: 0;
+	color: #111827;
+}
+
+.feature-item p {
+	font-size: 0.95rem;
+	color: #6b7280;
+	margin: 0;
+}
+
+/* push features group to take remaining vertical space so both cards look even */
+.contact-features {
+	margin-top: auto;
+}
+
+/* Contact Button */
+.contact-us-section {
+	text-align: center;
+}
+
+.contact-us-btn {
+	background: #2563eb;
+	color: #fff;
+	border: none;
+	padding: 14px 32px;
+	border-radius: 30px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.contact-us-btn:hover {
+	background: #1e40af;
+}
+
+/* ====== MODAL ====== */
+.contact-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999; /* Increased z-index to ensure it's above navbar */
+}
+
+.contact-modal.show {
+	display: flex;
+}
+
+.modal-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+	position: relative;
+	background: #fff;
+	padding: 30px; /* Reduced padding for smaller form */
+	border-radius: 12px; /* Slightly smaller border radius */
+	max-width: 500px; /* Reduced from 700px to 500px for smaller form */
+	width: 90%; /* Reduced from 95% to 90% */
+	z-index: 10000; /* Increased z-index */
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+	max-height: 85vh; /* Limit height to prevent overflow */
+	overflow-y: auto; /* Add scroll if content is too tall */
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px; /* Reduced from 25px */
+}
+
+.modal-header h2 {
+	font-size: 1.3rem; /* Reduced from 1.5rem */
+	font-weight: 500;
+	color: #2563eb;
+	margin: 0;
+}
+
+.close-btn {
+	background: none;
+	border: none;
+	font-size: 1.2rem; /* Reduced from 1.3rem */
+	cursor: pointer;
+	color: #6b7280;
+}
+
+.close-btn:hover {
+	color: #1d4ed8;
+}
+
+/* Form */
+.quick-contact-form .form-row {
+    display: block; /* stack rows vertically for modal */
+    gap: 0;
+    margin-bottom: 12px; /* keep same vertical spacing */
+}
+
+.quick-contact-form .form-group {
+    width: 100%; /* ensure full-width inputs inside modal */
+}
+
+.form-group {
+	margin-bottom: 16px; /* Reduced from 20px */
+}
+
+.form-group label {
+	display: block;
+	font-size: 0.9rem; /* Reduced from 0.95rem */
+	font-weight: 500;
+	margin-bottom: 6px; /* Reduced from 8px */
+	color: #374151;
+}
+
+.form-group input,
+.form-group textarea {
+	width: 100%;
+	padding: 12px 14px; /* Reduced from 14px 16px */
+	border: 1px solid #d1d5db;
+	border-radius: 6px; /* Reduced from 8px */
+	font-size: 14px;
+	transition: all 0.3s ease;
+	font-family: inherit;
+	box-sizing: border-box;
+}
+
+.form-group textarea {
+	resize: vertical;
+	min-height: 80px; /* Reduced from 100px */
+	line-height: 1.5;
+}
+
+.form-group input.error,
+.form-group textarea.error {
+	border-color: #1d4ed8;
+	background-color: #eff6ff;
+	box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+	border-color: #1d4ed8;
+	outline: none;
+	box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.error-message {
+	color: #1d4ed8;
+	font-size: 0.8rem;
+	margin-top: 5px;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	font-weight: 500;
+}
+
+/* Modal Buttons */
+.form-actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 15px;
+	margin-top: 30px;
+	padding-top: 20px;
+	border-top: 1px solid #f3f4f6;
+}
+
+.cancel-btn {
+	background: #e5e7eb;
+	border: none;
+	padding: 12px 24px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 14px;
+	transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+	background: #d1d5db;
+}
+
+.submit-modal-btn {
+	background: #2563eb;
+	color: #fff;
+	border: 1px solid #2563eb;
+	padding: 10px 24px; /* Reduced from 12px 28px */
+	border-radius: 6px; /* Reduced from 8px */
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 13px; /* Reduced from 14px */
+	display: flex;
+	align-items: center;
+	gap: 6px; /* Reduced from 8px */
+	transition: all 0.3s ease;
+}
+
+.submit-modal-btn:hover {
+	background: #fff;
+	color: #2563eb;
+	border: 1px solid #2563eb;
+	transform: translateY(-1px);
+}
+
+.submit-modal-btn:disabled {
+	background: #9ca3af;
+	cursor: not-allowed;
+	transform: none;
+}
+
+.submit-modal-btn:disabled:hover {
+	color: #2563eb;
+	transform: none;
+}
+
+.fa-spinner {
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* ====== THANK YOU MESSAGE ====== */
+.thank-you-message {
+	text-align: center;
+	padding: 20px 0;
+}
+
+.thank-you-content {
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+.thank-you-icon {
+	font-size: 4rem;
+	color: #4CAF50; /* success green */
+	margin-bottom: 20px;
+	animation: successPulse 1.5s ease-in-out;
+}
+
+.thank-you-message h3 {
+	font-size: 1.8rem;
+	font-weight: 600;
+	color: #2563eb;
+	margin-bottom: 15px;
+}
+
+.thank-you-text {
+	font-size: 1rem;
+	color: #374151;
+	line-height: 1.6;
+	margin-bottom: 25px;
+}
+
+.thank-you-details {
+	background: #f8f9fa;
+	border-radius: 8px;
+	padding: 20px;
+	margin-bottom: 25px;
+	text-align: left;
+}
+
+.detail-item {
+	display: flex;
+	align-items: center;
+	margin-bottom: 12px;
+	font-size: 0.9rem;
+	color: #374151;
+}
+
+.detail-item:last-child {
+	margin-bottom: 0;
+}
+
+.detail-item i {
+	color: #2563eb;
+	width: 20px;
+	margin-right: 12px;
+	font-size: 1rem;
+}
+
+.detail-item a {
+	color: #2563eb;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.detail-item a:hover {
+	text-decoration: underline;
+}
+
+.thank-you-actions {
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+}
+
+@keyframes successPulse {
+	0% {
+		transform: scale(0.8);
+		opacity: 0;
+	}
+	50% {
+		transform: scale(1.1);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+	.feature-text {
+		display: inline-block;
+		width: 75%;
+		margin-left: 10px;
+		font-size: 14px;
+	}
+	.feature-item h4 {
+		width: 100%;
+		margin: 0;
+	}
+	.contact-content {
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.contact-info,
+	.welcome-message {
+		width: 100%;
+	}
+
+	.quick-contact-form .form-row {
+		flex-direction: column;
+	}
+
+	.modal-content {
+		max-width: 90%; /* Reduced from 95% */
+		padding: 25px 20px; /* Reduced padding */
+		width: 85%; /* Added for smaller width */
+	}
+
+	.form-actions,
+	.thank-you-actions {
+		flex-direction: column-reverse;
+		gap: 8px; /* Reduced gap */
+	}
+
+	.cancel-btn,
+	.submit-modal-btn {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.thank-you-icon {
+		font-size: 3rem;
+	}
+
+	.thank-you-message h3 {
+		font-size: 1.5rem;
+	}
+
+	.thank-you-details {
+		padding: 15px;
+	}
+}
+
+@media (max-width: 480px) {
+	.contact-content {
+		gap: 15px;
+	}
+	.feature-text {
+		display: inline-block;
+		width: 75%;
+		margin-left: 10px;
+		font-size: 14px;
+	}
+	.feature-item h4 {
+		width: 100%;
+		margin: 0;
+	}
+	.contact-info,
+	.welcome-message {
+		padding: 20px;
+	}
+
+	.modal-content {
+		max-width: 95%; /* Slightly increased for very small screens */
+		padding: 20px 15px; /* Further reduced padding */
+		width: 90%;
+	}
+
+	.form-group {
+		margin-bottom: 14px; /* Reduced from 18px */
+	}
+
+	.modal-header h2 {
+		font-size: 1.2rem; /* Smaller title on mobile */
+	}
+}
