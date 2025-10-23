@@ -1,6 +1,9 @@
+/* stylelint-disable at-rule-no-unknown */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* stylelint-enable at-rule-no-unknown */
 
 @layer base {
   html {
@@ -246,9 +249,16 @@ body.products-visible .app-industries .slide-in-card {
 .app-industries .slide-in-card .card-face img,
 .app-industries .slide-in-card .card-face .card-image {
   will-change: transform;
-  display: block;
+  height: 10rem; /* reduced from 12rem to make photos slightly smaller */
   width: 100%;
   height: auto;
+
+/* Static contact page wrapper used to replace inline styles in contact-page.html */
+.static-contact-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
   transform-origin: center center;
 }
 
