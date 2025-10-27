@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact - A2 Intelligence</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <!-- Minimal static page: include header markup (simplified) -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+      <div class="container mx-auto px-4 py-4">
+        <div class="text-2xl font-bold text-gray-900">A2 Intelligence</div>
+      </div>
+    </header>
+
+    <main style="padding-top:90px;">
+      <!-- Insert contact component static content by copying the section markup -->
+      <!-- This is a simple standalone version that references the same CSS classes -->
+      <section class="contact-section">
+        <div class="container">
+          <div class="breadcrumb">
+            <span class="label"><span class="label-get">GET</span> <span class="label-in-touch">IN TOUCH</span></span>
+          </div>
+          <!-- include the contact content by referencing the component HTML file via server copy -->
+          <!-- We simply inline the markup used by the Angular component for static display. -->
+          <!-- BEGIN: contact content (simplified) -->
+          <!-- The component template is in src/app/components/contact/contact.html; copying is left to developer for full fidelity. -->
+          <div class="static-contact-wrapper">
+            <!-- For quick static fallback we show a link back to the app root and note the user should use the app for full interactivity -->
+            <h1>Contact (Static Page)</h1>
+            <p>This is a static contact page. For the full interactive contact form, open the main site.</p>
+            <p><a href="/">Return to site</a></p>
+          </div>
+          <!-- END: contact content -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-8">
+      <div class="container mx-auto px-4">© 2025 A2 Intelligence</div>
+    </footer>
+  </body>
+</html>

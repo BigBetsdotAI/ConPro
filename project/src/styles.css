@@ -1,0 +1,311 @@
+/* stylelint-disable at-rule-no-unknown */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* stylelint-enable at-rule-no-unknown */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-gray-900 m-0 p-0;
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+  }
+
+  /* Typography to match contact page */
+  h1, h2, h3, h4, h5 {
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color: #111827; /* neutral-900 */
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+  }
+  h3{
+    color: aliceblue;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 600; /* reduced from 700 */
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500; /* reduced from 600 */
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 400; /* reduced from 500 */
+  }
+
+  p {
+    color: #374151; /* neutral-700 */
+    font-size: 1rem;
+    margin: 0 0 1rem 0;
+  }
+}
+
+/* Card slide-in animations */
+.slide-in-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.slide-in-card.slide-in-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3D card flip (Y-axis) */
+.card-3d {
+  perspective: 1100px; /* depth for 3D effect */
+}
+
+/* inner element performs the rotation */
+.card-inner {
+  width: 100%;
+  height: 100%;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+}
+
+.card-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: block;
+}
+
+/* Front face sits normally */
+.card-front {
+  transform: rotateY(0deg) translateZ(0);
+  z-index: 2;
+}
+
+/* Back face starts rotated 180deg so when the inner container rotates it becomes visible */
+.card-back {
+  transform: rotateY(180deg) translateZ(0);
+  z-index: 1;
+}
+
+/* Start: show front. For dramatic entrance, we start the inner rotated so the card looks flipped away */
+.slide-in-card.card-3d .card-inner {
+  transform: rotateY(180deg) scale(0.96);
+  box-shadow: 0 8px 20px rgba(17,24,39,0.06);
+}
+
+/* When visible, rotate back to 0 so the front face is visible */
+.slide-in-card.slide-in-visible.card-3d .card-inner {
+  transform: rotateY(0deg) scale(1);
+  box-shadow: 0 18px 40px rgba(17,24,39,0.08);
+}
+
+/* Reduce motion on small devices */
+@media (max-width: 640px) {
+  .card-inner {
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .slide-in-card.card-3d .card-inner,
+  .slide-in-card.slide-in-visible.card-3d .card-inner {
+    transform: none !important;
+  }
+}
+
+/* Explicit opt-out for animations when author wants static cards */
+.slide-in-card.no-anim {
+  transition: none !important;
+  opacity: 1 !important;
+  box-shadow: 0 6px 16px rgba(17,24,39,0.06) !important;
+}
+.slide-in-card.no-anim .card-inner,
+.slide-in-card.no-anim .card-face {
+  transition: none !important;
+  transform: none !important;
+}
+
+/* When animations are disabled, hide the back face to avoid overlapping content (CTA/button) */
+.slide-in-card.no-anim .card-back {
+  display: none !important;
+}
+
+/* Products section entrance animation */
+.product-left, .product-right {
+  opacity: 0;
+  transform: translateX(0);
+  transition: transform 0.7s cubic-bezier(0.2,0.8,0.2,1), opacity 0.6s ease;
+}
+
+/* Use CSS variable --i (index) for staggered delay */
+.product-left {
+  transform: translateX(-40px);
+}
+.product-right {
+  transform: translateX(40px);
+}
+
+.products-in-view .product-left,
+.products-in-view .product-right {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger by index (simple approach: small incremental delay) */
+.product-left[style*='--i:'] {
+  transition-delay: calc(var(--i) * 60ms);
+}
+.product-right[style*='--i:'] {
+  transition-delay: calc(var(--i) * 60ms);
+}
+
+/* Reduce motion on small screens */
+@media (max-width: 640px) {
+  .product-left, .product-right {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Shake animation used by Industries cards when Products are visible */
+@keyframes card-shake {
+  0% { transform: translateX(0); }
+  10% { transform: translateX(-6px) rotate(-1deg); }
+  20% { transform: translateX(6px) rotate(1deg); }
+  30% { transform: translateX(-4px) rotate(-0.5deg); }
+  40% { transform: translateX(4px) rotate(0.5deg); }
+  50% { transform: translateX(-2px) rotate(-0.25deg); }
+  60% { transform: translateX(2px) rotate(0.25deg); }
+  70% { transform: translateX(0); }
+  100% { transform: translateX(0); }
+}
+
+/* When Products are visible, make industries cards shake together briefly */
+body.products-visible .app-industries .slide-in-card {
+  animation: card-shake 700ms ease-in-out 1;
+}
+
+/* Slightly reduce motion on small screens */
+@media (max-width: 640px) {
+  body.products-visible .app-industries .slide-in-card {
+    animation: none;
+  }
+}
+
+/* Industries hover lift: small upward translation + stronger shadow */
+.app-industries .slide-in-card {
+  transition: transform 240ms cubic-bezier(.2,.8,.2,1), box-shadow 240ms ease, opacity 180ms ease;
+}
+
+/* Apply transform to the face so it can override no-anim transform rules (use !important and a specific selector placed after earlier rules) */
+.app-industries .slide-in-card.no-anim:hover .card-face,
+.app-industries .slide-in-card:hover .card-face {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 22px 40px rgba(17,24,39,0.12) !important;
+}
+
+/* Subtle scale and lift on larger screens only */
+@media (min-width: 640px) {
+  .app-industries .slide-in-card.no-anim:hover .card-face,
+  .app-industries .slide-in-card:hover .card-face {
+    transform: translateY(-12px) scale(1.01) !important;
+  }
+  /* keyboard focus support */
+  .app-industries .slide-in-card.no-anim:focus-visible .card-face,
+  .app-industries .slide-in-card:focus-visible .card-face {
+    transform: translateY(-12px) scale(1.01) !important;
+    box-shadow: 0 22px 40px rgba(17,24,39,0.12) !important;
+    outline: none;
+  }
+}
+
+@media (max-width: 640px) {
+  /* disable hover motion on touch devices */
+  .app-industries .slide-in-card.no-anim:hover .card-face,
+  .app-industries .slide-in-card:hover .card-face {
+    transform: none !important;
+    box-shadow: 0 8px 20px rgba(17,24,39,0.06) !important;
+  }
+}
+
+/* ---------- Parallax scroll scaling for industries cards --------- */
+/* Card container scales from 1 -> 1.5 while in view; image scales 1 -> 2 for stronger parallax */
+.app-industries .slide-in-card {
+  will-change: transform;
+  /* ensure transform origin is center for even scaling */
+  transform-origin: center center;
+}
+
+.app-industries .slide-in-card .card-face img,
+.app-industries .slide-in-card .card-face .card-image {
+  will-change: transform;
+  height: 10rem; /* reduced from 12rem to make photos slightly smaller */
+  width: 100%;
+  height: auto;
+
+/* Static contact page wrapper used to replace inline styles in contact-page.html */
+.static-contact-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
+  transform-origin: center center;
+}
+
+/* Ensure the image area clips scaled images so only the image zooms, not the card box */
+.app-industries .slide-in-card .card-front {
+  overflow: hidden;
+}
+
+.app-industries .slide-in-card .card-face img {
+  object-fit: cover;
+  width: 100%;
+  height: 8rem; /* reduced from 12rem to make photos slightly smaller */
+  display: block;
+}
+
+/* Transition fallback for browsers that don't run the JS quickly - keeps motion smooth */
+.app-industries .slide-in-card.is-parallaxing {
+  transition: transform 160ms linear;
+}
+.app-industries .slide-in-card .card-face img.is-parallaxing,
+.app-industries .slide-in-card .card-face .card-image.is-parallaxing {
+  transition: transform 220ms linear;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .app-industries .slide-in-card,
+  .app-industries .slide-in-card .card-face img,
+  .app-industries .slide-in-card .card-face .card-image {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Utility: when the card is out of view we remove transforms to avoid accidental stacking/context issues */
+.app-industries .slide-in-card.parallax-out-of-view {
+  transform: none !important;
+}
+
+/* Tilt helper: small 3D tilt while pointer moves over the card (opt-in via data-tilt)
+   We isolate transform composition by applying rotateX/rotateY on inner face and keeping scale on container */
+.app-industries .slide-in-card .card-face {
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.app-industries .slide-in-card.tilt-active .card-face {
+  transition: transform 120ms linear;
+}
+

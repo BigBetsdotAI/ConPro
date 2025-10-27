@@ -1,0 +1,129 @@
+/* Parallax and slide-in animation styles for hero section */
+.hero-parallax-bg {
+
+  /* use provided photo as background; fallback to subtle tint if image missing */
+  /* assets are served from /assets/ in Angular/Vite builds */
+  background-image: url('https://images.unsplash.com/photo-1606857521015-7f9fcf423740?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b2ZmaWNlJTIwY3ViaWNsZXN8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000');
+  /* background-color: #d9dfd6; */
+  background-repeat: no-repeat;
+  
+  background-size: cover;
+  background-position: center center;
+  min-height: 100vh; /* make hero cover full viewport */
+  display: flex;
+  align-items: center; /* vertically center content */
+  transition: background-position 0s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+  z-index: 0;
+}
+
+/* hero heading color to match design */
+.hero-heading {
+  /* make heading slightly transparent for a softer look */
+  color: rgba(255,255,255,0.85);
+}
+
+/* make gradient span slightly transparent as well */
+.hero-heading .bg-clip-text {
+  opacity: 0.9;
+}
+
+/* paragraph copy inside hero: slightly translucent white */
+.hero-parallax-bg p {
+  color: rgba(255,255,255,0.85);
+}
+
+/* dark overlay to keep text readable */
+.hero-parallax-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 16, 27, 0.5);
+  pointer-events: none;
+  z-index: 1; /* sit above background image but behind content */
+}
+
+/* ensure the inner content sits above the overlay */
+.hero-parallax-bg > .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* social icons bar on the right side: keep them contained inside the hero section
+   instead of fixed to the viewport so they scroll away with the page. */
+.hero-parallax-bg .hero-social {
+  position: absolute !important; /* override utility 'fixed' in the template */
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+}
+
+/* left-side pager */
+.hero-pager .pager-item {
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.95);
+  position: relative;
+  padding: 6px 4px;
+}
+.hero-pager .pager-item.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 28px;
+  height: 3px;
+  background: white;
+}
+.hero-parallax-bg .hero-pager {
+  position: absolute !important; /* override utility 'fixed' */
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+}
+
+/* hide these decorative controls on small screens */
+@media (max-width: 768px) {
+  .hero-parallax-bg .hero-social,
+  .hero-parallax-bg .hero-pager {
+    display: none !important;
+  }
+}
+
+/* social link base */
+.social-link {
+  transition: transform 200ms ease, background-color 200ms ease;
+  background: transparent;
+}
+.social-link svg { display: block; }
+
+/* brand hover colors */
+.social-link.facebook:hover { background: #3b5998; transform: scale(1.05); }
+.social-link.twitter:hover { background: #1da1f2; transform: scale(1.05); }
+.social-link.linkedin:hover { background: #0077b5; transform: scale(1.05); }
+.social-link.instagram:hover { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); transform: scale(1.05); }
+
+/* services warm background class (applied to services section) */
+.services-warm {
+  background: linear-gradient(180deg, rgba(255,247,236,0.6) 0%, rgba(255,247,236,0.6) 100%);
+}
+
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 1s cubic-bezier(0.4,0,0.2,1), transform 1s cubic-bezier(0.4,0,0.2,1);
+}
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 1s cubic-bezier(0.4,0,0.2,1), transform 1s cubic-bezier(0.4,0,0.2,1);
+}
+.slide-in-visible {
+  opacity: 1;
+  transform: translateX(0);
+}

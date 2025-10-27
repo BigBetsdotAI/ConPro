@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>A2 Intelligence - AI Solutions</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+  <!-- Hover-only image zoom for industry cards (uses pointer events) -->
+  <script>
+    (function(){
+      if (typeof window === 'undefined') return;
+
+      // Respect reduced motion preference
+      const mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (mq && mq.matches) return;
+
+      const selector = '#industries .slide-in-card';
+      const supportsPointer = window.matchMedia && window.matchMedia('(pointer:fine)').matches;
+
+      function enableTilt(card) {
+        const face = card.querySelector('.card-face');
+        if (!face) return;
+        const maxTilt = 4; // degrees
+
+        function onPointerMove(e){
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width; // 0..1
+          const py = (e.clientY - r.top) / r.height; // 0..1
+          const cx = (px - 0.5) * 2;
+          const cy = (py - 0.5) * 2;
+          const rotY = Math.max(-maxTilt, Math.min(maxTilt, cx * maxTilt));
+          const rotX = Math.max(-maxTilt, Math.min(maxTilt, -cy * maxTilt));
+          face.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+          card.classList.add('tilt-active');
+        }
+
+        function onPointerLeave(){
+          face.style.transform = '';
+          card.classList.remove('tilt-active');
+        }
+
+        card.addEventListener('pointermove', onPointerMove);
+        card.addEventListener('pointerleave', onPointerLeave);
+      }
+
+      function initHoverScaling(){
+        const cards = Array.from(document.querySelectorAll(selector));
+        if (!cards.length) return;
+
+        cards.forEach(card => {
+          const img = card.querySelector('.card-face img, .card-image');
+          const imgMax = parseFloat(card.getAttribute('data-img-scale')) || 1.35;
+          const wantsTilt = (card.getAttribute('data-tilt') === 'true' || card.getAttribute('data-tilt') === '');
+
+          if (!img) return;
+
+          // ensure smooth transition
+          img.style.transition = 'transform 260ms ease';
+
+          const onEnter = () => {
+            img.style.transform = `translateZ(0) scale(${imgMax})`;
+            img.classList.add('is-parallaxing');
+          };
+          const onLeave = () => {
+            img.style.transform = '';
+            img.classList.remove('is-parallaxing');
+          };
+
+          card.addEventListener('pointerenter', onEnter);
+          card.addEventListener('pointerleave', onLeave);
+
+          if (wantsTilt && supportsPointer) enableTilt(card);
+        });
+      }
+
+      // Observe DOM changes and init when cards appear
+      const mo = new MutationObserver((mutations)=>{
+        if (mutations.some(m => m.addedNodes && m.addedNodes.length)) initHoverScaling();
+      });
+      mo.observe(document.documentElement || document.body, { childList: true, subtree: true });
+
+      if (document.readyState === 'complete' || document.readyState === 'interactive') initHoverScaling();
+      else document.addEventListener('DOMContentLoaded', initHoverScaling);
+
+      window.addEventListener('unload', ()=>{ mo.disconnect(); });
+    })();
+  </script>
+</body>
+</html>
