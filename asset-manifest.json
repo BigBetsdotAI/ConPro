@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.39e617a1.css",
+    "main.js": "/static/js/main.e82a0426.js",
+    "static/media/hero-abstract-flow.png": "/static/media/hero-abstract-flow.335bbf2e431f8d56aa64.png",
+    "static/media/automation-healthcare.png": "/static/media/automation-healthcare.f44442385829e80f6581.png",
+    "static/media/ai-trends-2025.png": "/static/media/ai-trends-2025.c771ed685dee8244d70b.png",
+    "static/media/ai-chatbot-diagram.png": "/static/media/ai-chatbot-diagram.22065f057d4a8139cec7.png",
+    "static/media/healthcare-expensive.png": "/static/media/healthcare-expensive.7767cdb22685d26d2494.png",
+    "static/media/Screen-Shot-2022-12-06-at-13.14.38.png": "/static/media/Screen-Shot-2022-12-06-at-13.14.38.3134fdd9e1998d55663e.png",
+    "static/media/ebay.png": "/static/media/ebay.4f8bed732c8f0a586909.png",
+    "static/media/nike-logo.png": "/static/media/nike-logo.954a0a5dfd6f20f5975c.png",
+    "index.html": "/index.html",
+    "static/media/ai-circle.svg": "/static/media/ai-circle.be5df0b47244536fe3f40e0c07f94aed.svg",
+    "static/media/chat-code.svg": "/static/media/chat-code.e26000f97443608999b9eb2a58a8ad31.svg",
+    "static/media/dashboard.svg": "/static/media/dashboard.074efbbe71b4fa6b17a98b723355edc3.svg",
+    "static/media/apple-logo.svg": "/static/media/apple-logo.635fa487a53e9ac3cf27431b1da19914.svg",
+    "static/media/chat-arrow.svg": "/static/media/chat-arrow.eb67ed99e24fe41327c9fe0c628bdb46.svg",
+    "static/media/network.svg": "/static/media/network.2524120b3e3ccd22480e4341b01bba55.svg",
+    "static/media/mobile-lightning.svg": "/static/media/mobile-lightning.d751ba7b5db72adf0f7852f349db58e3.svg",
+    "static/media/amazon-logo.svg": "/static/media/amazon-logo.80bef6bf1ad336d16b75f29b569e76c6.svg",
+    "static/media/aliexpress-logo.svg": "/static/media/aliexpress-logo.431940b5369dda8ca1e6566e2ee3ffb4.svg",
+    "static/media/samsung-logo.svg": "/static/media/samsung-logo.2e7fcdc1c1c6c3c56b6b7991e1264bb8.svg",
+    "main.39e617a1.css.map": "/static/css/main.39e617a1.css.map",
+    "main.e82a0426.js.map": "/static/js/main.e82a0426.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.39e617a1.css",
+    "static/js/main.e82a0426.js"
+  ]
+}
