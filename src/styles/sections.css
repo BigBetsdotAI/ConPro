@@ -1806,7 +1806,7 @@
   border: 1px solid rgba(139, 92, 246, 0.3);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  color: #000000;
   font-size: 0.875rem;
   transition: border-color 0.3s ease;
   /* disable visual blur for clarity */

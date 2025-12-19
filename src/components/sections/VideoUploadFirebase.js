@@ -3,6 +3,7 @@ import { storage, db, auth } from '../../firebase/config';
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject, listAll } from 'firebase/storage';
 import { collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, where } from 'firebase/firestore';
 import { signInAnonymously, onAuthStateChanged } from 'firebase/auth';
+import { AuthModal } from '../ui';
 import '../../styles/blog.css';
 
 const VideoUploadFirebase = () => {
@@ -13,24 +14,22 @@ const VideoUploadFirebase = () => {
     const [uploadProgress, setUploadProgress] = useState(0);
     const [isUploading, setIsUploading] = useState(false);
     const [user, setUser] = useState(null);
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+    const [authMode, setAuthMode] = useState('login');
     const fileInputRef = useRef(null);
 
-    // Authenticate user anonymously
+    // Monitor authentication state
     useEffect(() => {
-        const authenticateUser = async () => {
-            onAuthStateChanged(auth, async (currentUser) => {
-                if (currentUser) {
-                    setUser(currentUser);
-                    loadVideos(currentUser.uid);
-                } else {
-                    // Sign in anonymously if no user
-                    const userCredential = await signInAnonymously(auth);
-                    setUser(userCredential.user);
-                    loadVideos(userCredential.user.uid);
-                }
-            });
-        };
-        authenticateUser();
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            if (currentUser) {
+                setUser(currentUser);
+                loadVideos(currentUser.uid);
+            } else {
+                setUser(null);
+                setUploadedVideos([]);
+            }
+        });
+        return () => unsubscribe();
     }, []);
 
     // Load videos from Firestore
@@ -87,8 +86,14 @@ const VideoUploadFirebase = () => {
     };
 
     const handleUpload = async () => {
-        if (!selectedFile || !user) {
-            alert('Please select a file and wait for authentication.');
+        if (!user) {
+            setAuthMode('signup');
+            setIsAuthModalOpen(true);
+            return;
+        }
+        
+        if (!selectedFile) {
+            alert('Please select a file to upload.');
             return;
         }
 
@@ -194,7 +199,33 @@ const VideoUploadFirebase = () => {
                     <div className="card-header">
                         <h3>Share Your Insight</h3>
                         <p>Upload videos permanently to cloud storage (Max 100MB per video)</p>
-                        {user && <p className="user-id">User ID: {user.uid.substring(0, 8)}...</p>}
+                        {user ? (
+                            <p className="user-id">Logged in as: {user.email || user.uid.substring(0, 8) + '...'}</p>
+                        ) : (
+                            <div className="auth-prompt">
+                                <p className="auth-message">Please log in to upload videos</p>
+                                <div className="auth-buttons-inline">
+                                    <button 
+                                        className="btn btn-secondary login-btn-inline"
+                                        onClick={() => {
+                                            setAuthMode('login');
+                                            setIsAuthModalOpen(true);
+                                        }}
+                                    >
+                                        Login
+                                    </button>
+                                    <button 
+                                        className="btn btn-primary signup-btn-inline"
+                                        onClick={() => {
+                                            setAuthMode('signup');
+                                            setIsAuthModalOpen(true);
+                                        }}
+                                    >
+                                        Sign Up
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     <div
@@ -249,6 +280,12 @@ const VideoUploadFirebase = () => {
                         </button>
                     </div>
                 </div>
+
+                <AuthModal
+                    isOpen={isAuthModalOpen}
+                    onClose={() => setIsAuthModalOpen(false)}
+                    initialMode={authMode}
+                />
 
                 {/* Display uploaded videos list */}
                 {uploadedVideos.length > 0 && (

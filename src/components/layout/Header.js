@@ -11,32 +11,11 @@ const Header = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState('login');
   const [user, setUser] = useState(null);
-  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
   const location = useLocation();
   const [isProductsOpen, setIsProductsOpen] = useState(false);
 
   const isActive = (path) => location.pathname === path;
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-      setShowUserMenu(false);
-    } catch (error) {
-      console.error('Sign out error:', error);
-    }
-  };
-
-  const openAuthModal = (mode) => {
-    setAuthMode(mode);
-    setIsAuthModalOpen(true);
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,6 +25,11 @@ const Header = () => {
     };
 
     const handleOpenContactModal = () => setIsContactModalOpen(true);
+
+    // Monitor authentication state
+    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
 
     // Expose a global function as a fallback for components that cannot
     // reliably dispatch/listen to custom events in some environments.
@@ -58,6 +42,7 @@ const Header = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('openContactModal', handleOpenContactModal);
+      unsubscribeAuth();
       // Clean up the global function when header unmounts
       try { delete window.openContactModal; } catch (e) { window.openContactModal = undefined; }
     };
@@ -203,56 +188,6 @@ const Header = () => {
             <li><Link to="/company" className={`nav-link ${isActive('/company') ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>Company</Link></li>
           </ul>
           <div className="nav-contact-btn-wrapper">
-            {user ? (
-              <div className="user-menu-container">
-                <button 
-                  className="user-avatar-btn"
-                  onClick={() => setShowUserMenu(!showUserMenu)}
-                >
-                  {user.photoURL ? (
-                    <img src={user.photoURL} alt={user.displayName} />
-                  ) : (
-                    <div className="avatar-placeholder">
-                      {user.displayName?.charAt(0) || user.email?.charAt(0) || 'U'}
-                    </div>
-                  )}
-                </button>
-                {showUserMenu && (
-                  <div className="user-dropdown">
-                    <div className="user-info">
-                      <p className="user-name">{user.displayName || 'User'}</p>
-                      <p className="user-email">{user.email}</p>
-                    </div>
-                    <hr />
-                    <button onClick={handleSignOut} className="signout-btn">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                        <polyline points="16 17 21 12 16 7" />
-                        <line x1="21" y1="12" x2="9" y2="12" />
-                      </svg>
-                      Sign Out
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="auth-buttons">
-                <button
-                  onClick={() => openAuthModal('login')}
-                  className="btn btn-outline login-btn"
-                >
-                  Login
-                </button>
-                <button
-                  onClick={() => openAuthModal('signup')}
-                  className="btn btn-primary signup-btn"
-                >
-                  Sign Up
-                </button>
-              </div>
-            )}
-          </div>
-          <div className="nav-contact-btn-wrapper-mobile">
             <button
               onClick={() => {
                 setIsMenuOpen(false);
@@ -266,6 +201,73 @@ const Header = () => {
             </button>
           </div>
         </nav>
+
+        {/* Auth buttons or User Profile - Desktop only */}
+        {!user ? (
+          <div className="auth-buttons">
+            <button 
+              className="btn-login"
+              onClick={() => {
+                setAuthMode('login');
+                setIsAuthModalOpen(true);
+              }}
+            >
+              Login
+            </button>
+            <button 
+              className="btn-signup"
+              onClick={() => {
+                setAuthMode('signup');
+                setIsAuthModalOpen(true);
+              }}
+            >
+              Sign Up
+            </button>
+          </div>
+        ) : (
+          <div className="user-menu-container">
+            <button 
+              className="user-avatar-btn"
+              onClick={() => setShowUserDropdown(!showUserDropdown)}
+            >
+              <div className="avatar-placeholder">
+                {user.isAnonymous ? '👤' : (user.email?.[0]?.toUpperCase() || '👤')}
+              </div>
+            </button>
+            
+            {showUserDropdown && (
+              <div className="user-dropdown">
+                <div className="user-info">
+                  <div className="user-name">
+                    {user.isAnonymous ? 'Guest User' : user.displayName || 'User'}
+                  </div>
+                  {!user.isAnonymous && user.email && (
+                    <div className="user-email">{user.email}</div>
+                  )}
+                </div>
+                <hr />
+                <button 
+                  className="signout-btn"
+                  onClick={async () => {
+                    try {
+                      await signOut(auth);
+                      setShowUserDropdown(false);
+                    } catch (error) {
+                      console.error('Sign out error:', error);
+                    }
+                  }}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                  </svg>
+                  Sign Out
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
         <ContactModal
           isOpen={isContactModalOpen}

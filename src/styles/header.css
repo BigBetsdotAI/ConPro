@@ -638,13 +638,52 @@
   display: none;
 }
 
+/* Auth Buttons Styling */
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.btn-login,
+.btn-signup {
+  padding: 8px 18px;
+  border-radius: 24px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  white-space: nowrap;
+}
+
+.btn-login {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-login:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+}
+
+.btn-signup {
+  background: linear-gradient(135deg, #7186FF 0%, #FE7587 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(113, 134, 255, 0.3);
+}
+
+.btn-signup:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(113, 134, 255, 0.4);
+}
+
 @media (max-width: 768px) {
   .auth-buttons {
-    flex-direction: column;
-    width: 80%;
-    max-width: 320px;
-    gap: 12px;
-    margin: 1.5rem auto 0;
+    display: none;
   }
 
   .login-btn,
