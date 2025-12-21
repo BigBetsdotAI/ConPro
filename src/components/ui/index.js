@@ -6,3 +6,5 @@ export { default as ScrollFadeSection } from './ScrollFadeSection';
 export { default as ScrollFadeElement } from './ScrollFadeElement';
 export { default as HeroVideoBackground } from './HeroVideoBackground';
 export { default as SlideInLeft } from './SlideInLeft';
+export { default as ChatAgent } from './ChatAgent';
+export { default as AdminDashboard } from './AdminDashboard';

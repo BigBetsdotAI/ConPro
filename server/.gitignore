@@ -1,0 +1,10 @@
+# Backend dependencies
+node_modules/
+user_data.xlsx
+
+# Environment variables
+.env
+
+# Logs
+*.log
+npm-debug.log*

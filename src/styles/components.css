@@ -316,11 +316,10 @@
   background: #1e293b;
   color: white;
   padding: 0.5rem 1rem;
-  display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #334155;
-  height: 40px;
+  height: 75px;
 }
 
 .chat-title {
@@ -565,7 +564,6 @@
   flex: 1;
   padding: 1rem;
   overflow-y: auto;
-  display: flex;
   flex-direction: column;
   gap: 0.75rem;
   background: #1e293b;

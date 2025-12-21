@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from './components';
 import { Home, About, Services, Products, Testimonials, Careers, CaseStudies, Blog, Solutions, Company, AgenticAIConsulting, ProductStrategy, ProductDevelopment, Privacy, Terms } from './pages';
 import CaseStudyDetail from './pages/CaseStudyDetail';
+import ChatAgentPage from './pages/ChatAgentPage';
+import AdminPage from './pages/AdminPage';
 import './styles/index.css';
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
             <Route path="/product-development" element={<ProductDevelopment />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="/chat-agent" element={<ChatAgentPage />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </Layout>
       </div>

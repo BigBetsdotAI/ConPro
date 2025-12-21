@@ -14,3 +14,5 @@ export { default as ProductStrategy } from './ProductStrategy';
 export { default as ProductDevelopment } from './ProductDevelopment';
 export { default as Privacy } from './Privacy';
 export { default as Terms } from './Terms';
+export { default as ChatAgentPage } from './ChatAgentPage';
+export { default as AdminPage } from './AdminPage';

@@ -185,6 +185,7 @@ const Header = () => {
             <li><Link to="/services" className={`nav-link ${isActive('/services') ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>Services</Link></li>
             <li><Link to="/case-studies" className={`nav-link ${isActive('/case-studies') ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>Case Studies</Link></li>
             <li><Link to="/blog" className={`nav-link ${isActive('/blog') ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>Blog</Link></li>
+            <li><Link to="/chat-agent" className={`nav-link ${isActive('/chat-agent') ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>Chat Agent</Link></li>
             <li><Link to="/company" className={`nav-link ${isActive('/company') ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>Company</Link></li>
           </ul>
           <div className="nav-contact-btn-wrapper">

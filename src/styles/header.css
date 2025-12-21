@@ -377,7 +377,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(10px);
   background: rgba(26, 20, 48, 0.95);
-  backdrop-filter: blur(10px);
+
   min-width: 260px;
   border-radius: 12px;
   padding: 0.5rem;
